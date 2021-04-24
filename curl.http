@@ -1,0 +1,10 @@
+### register
+curl -X 'POST' \
+  'http://localhost:8081/api/v2/register' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "admin",
+  "password": "1234",
+  "level": "normal"
+}'
