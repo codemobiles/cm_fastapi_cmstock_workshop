@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import Optional
 from app.api import schema
@@ -10,8 +10,13 @@ def get_authen():
     return {"result": "authen"}
 
 
+def d1():
+    return "Hey"
+
+
 @router.post("/register")
-def register(user: schema.User):
+def register(user: schema.User, msg: str = Depends(d1)):
+    print("Register is called" + msg)
     return user
 
 
