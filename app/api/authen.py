@@ -2,6 +2,9 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import Optional
 from app.api import schema
+from app.db import get_db
+from sqlalchemy.orm import Session
+
 router = APIRouter()
 
 
@@ -10,12 +13,8 @@ def get_authen():
     return {"result": "authen"}
 
 
-def d1():
-    return "Hey"
-
-
 @router.post("/register")
-def register(user: schema.User, msg: str = Depends(d1)):
+def register(user: schema.User, db: Session = Depends(get_db)):
     print("Register is called" + msg)
     return user
 
