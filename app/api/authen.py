@@ -13,3 +13,8 @@ def get_authen():
 @router.post("/register")
 def register(user: schema.User):
     return user
+
+
+@router.post("/login")
+def login(user: schema.User):
+    return user
