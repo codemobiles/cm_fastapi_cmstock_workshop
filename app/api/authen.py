@@ -1,14 +1,8 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
-
+from app.api import schema
 router = APIRouter()
-
-
-class User(BaseModel):
-    username: str
-    password: str
-    level: Optional[str] = "normal"
 
 
 @router.get("/authen")
@@ -17,5 +11,5 @@ def get_authen():
 
 
 @router.post("/register")
-def register(user: User):
+def register(user: schema.User):
     return user
