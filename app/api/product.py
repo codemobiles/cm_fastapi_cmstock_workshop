@@ -39,6 +39,12 @@ def save_upload_file(upload_file: UploadFile, id: str) -> str:
         upload_file.file.close()
 
 
+@router.get("/{id}")
+async def get_product_by_id(id: str, db: Session = Depends(get_db)):
+    product = db.query(ProductDB).filter(ProductDB.id == id).first()
+    return product
+
+
 @router.post("/")
 async def insert_product(product: schema.Product = Depends(get_product_form),
                          image: UploadFile = File(...),
