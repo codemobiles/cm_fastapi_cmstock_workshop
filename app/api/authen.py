@@ -21,9 +21,24 @@ def register(user: schema.User, db: Session = Depends(get_db)):
                      password=security.get_password_hash(user.password))
     db.add(user_db)
     db.commit()
-    return {"register": "ok"}
+    return {"result": "ok"}
 
 
 @router.post("/login")
-def login(user: schema.User):
-    return user
+def login(user: schema.User, db: Session = Depends(get_db)):
+    try:
+        user_db = db.query(UserDB).filter(
+            UserDB.username == user.username).first()
+
+        # verify username
+        if not user_db:
+            return {"result": "nok", "error": "invalide username"}
+
+        # verify password
+        if not security.verify_password(user.password, user_db.password):
+            return {"result": "nok", "error": "invalide password"}
+
+        # login success
+        return {"result": "ok"}
+    except Exception as e:
+        return {"result": "nok", "error": e}
