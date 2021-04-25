@@ -4,8 +4,8 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "username": "lek",
-  "password": "555",
+  "username": "root",
+  "password": "1234",
   "level": "normal"
 }'
 
@@ -15,6 +15,6 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "username": "lek",
-  "password": "555"  
+  "username": "admin",
+  "password": "1234"  
 }'

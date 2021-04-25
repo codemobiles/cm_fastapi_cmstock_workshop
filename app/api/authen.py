@@ -17,11 +17,15 @@ def get_authen():
 
 @router.post("/register")
 def register(user: schema.User, db: Session = Depends(get_db)):
-    user_db = UserDB(username=user.username,
-                     password=security.get_password_hash(user.password))
-    db.add(user_db)
-    db.commit()
-    return {"result": "ok"}
+
+    try:
+        user_db = UserDB(username=user.username,
+                         password=security.get_password_hash(user.password))
+        db.add(user_db)
+        db.commit()
+        return {"result": "ok"}
+    except Exception as e:
+        return {"result": "nok", "error": "duplicate username"}
 
 
 @router.post("/login")
