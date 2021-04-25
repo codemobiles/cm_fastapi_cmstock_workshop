@@ -9,6 +9,7 @@ from app.models.Product import Product as ProductDB
 from app.api import security
 from pathlib import Path
 import os
+import shutil
 
 router = APIRouter()
 
@@ -25,6 +26,18 @@ def get_product_form(id: Optional[str] = Form(None),
     return schema.Product(id=id, name=name, price=price, stock=stock, image="")
 
 
+def save_upload_file(upload_file: UploadFile, id: str) -> str:
+    try:
+        fileName = "{}.jpg".format(id)
+        dest = Path(os.getcwd() + "/uploaded/images/{}".format(fileName))
+        with dest.open("wb") as buffer:
+            shutil.copyfileobj(upload_file.file, buffer)
+
+        return fileName
+    finally:
+        upload_file.file.close()
+
+
 @router.post("/")
 async def insert_product(product: schema.Product = Depends(get_product_form),
                          image: UploadFile = File(...),
@@ -33,7 +46,15 @@ async def insert_product(product: schema.Product = Depends(get_product_form),
         db_product = ProductDB(**product.dict())
         db.add(db_product)
         db.commit()
-        return {"result": "ok", "image": image}
+
+        if image:
+            fileName = save_upload_file(image, db_product.id)
+            product_db = db.query(ProductDB).filter(
+                ProductDB.id == db_product.id)
+            product_db.update({ProductDB.image: fileName})
+            db.commit()
+
+        return db_product.as_dict()
     except Exception as e:
         return {"product": "nok", "error": str(e)}
 

@@ -13,5 +13,8 @@ class Product(Base):
     image = Column(String(256))
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     class Config:
         arbitrary_types_allowed = True
