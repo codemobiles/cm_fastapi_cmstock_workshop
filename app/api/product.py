@@ -5,7 +5,7 @@ from app.api import schema
 
 from app.db import get_db
 from sqlalchemy.orm import Session
-from app.models.User import User as UserDB
+from app.models.Product import Product as ProductDB
 from app.api import security
 
 
@@ -27,7 +27,13 @@ def get_product_form(id: Optional[str] = Form(None),
 @router.post("/")
 async def insert_product(product: schema.Product = Depends(get_product_form),
                          db: Session = Depends(get_db)):
-    return product
+    try:
+        db_product = ProductDB(**product.dict())
+        db.add(db_product)
+        db.commit()
+        return {"result": "ok"}
+    except Exception as e:
+        return {"product": "nok", "error": str(e)}
 
 
 @router.get("/{id}")

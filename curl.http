@@ -25,4 +25,4 @@ curl -X 'POST' \
   'http://localhost:8081/api/v2/product/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'id=&name=test&price=11&stock=33'
+  -d 'id=&name=test2&price=211&stock=233'
