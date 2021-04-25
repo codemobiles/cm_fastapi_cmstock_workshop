@@ -45,6 +45,21 @@ def delete_upload_file(fileName: str) -> None:
         os.remove(filePath)
 
 
+@router.put("/")
+async def update_product(product: schema.Product = Depends(get_product_form),
+                         image: Optional[UploadFile] = File(None),
+                         db: Session = Depends(get_db)):
+    try:
+        product_db = db.query(ProductDB).filter(ProductDB.id == product.id)
+        product_db.update({ProductDB.name: product.name,
+                           ProductDB.price: product.price,
+                           ProductDB.stock: product.stock})
+        db.commit()
+        return {"result": "ok"}
+    except Exception as e:
+        return {"product": "nok", "error": str(e)}
+
+
 @router.delete("/{id}")
 async def delete_product(id: str, db: Session = Depends(get_db)):
     try:
