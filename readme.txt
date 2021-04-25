@@ -6,3 +6,4 @@ source : https://github.com/codemobiles/cm_fastapi_cmstock_workshop
 - uvicorn app.main:app --reload --port 8081
 - pipenv install aiofiles
 - install : pip3 install "passlib[bcrypt]"  
+- install : pip3 install python-multipart

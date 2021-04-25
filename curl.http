@@ -18,3 +18,11 @@ curl -X 'POST' \
   "username": "admin",
   "password": "1234"  
 }'
+
+
+### add product
+curl -X 'POST' \
+  'http://localhost:8081/api/v2/product/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'id=&name=test&price=11&stock=33'
