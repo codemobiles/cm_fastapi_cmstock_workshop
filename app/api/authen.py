@@ -4,7 +4,7 @@ from typing import Optional
 from app.api import schema
 from app.db import get_db
 from sqlalchemy.orm import Session
-
+from app.models.User import User as UserDB
 router = APIRouter()
 
 
@@ -15,7 +15,9 @@ def get_authen():
 
 @router.post("/register")
 def register(user: schema.User, db: Session = Depends(get_db)):
-    print("Register is called" + msg)
+    user_db = UserDB(username=user.username, password=user.password)
+    db.add(user_db)
+    db.commit()
     return user
 
 

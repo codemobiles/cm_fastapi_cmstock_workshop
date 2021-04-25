@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 from app.api import authen, product, transaction
+from app.models import database
+database.Base.metadata.create_all(database.engine, checkfirst=True)
 
 api_router = APIRouter()
 
