@@ -43,6 +43,7 @@ curl -X 'PUT' \
 -H 'accept: application/json' \
 -H 'Content-Type: multipart/form-data' \
 -F 'id=3' \
+-F 'image=@test2.jpg;type=image/jpeg' \
 -F 'name=test3' \
 -F 'price=100' \
 -F 'stock=200'

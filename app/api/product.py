@@ -50,11 +50,17 @@ async def update_product(product: schema.Product = Depends(get_product_form),
                          image: Optional[UploadFile] = File(None),
                          db: Session = Depends(get_db)):
     try:
+        # update meta
         product_db = db.query(ProductDB).filter(ProductDB.id == product.id)
         product_db.update({ProductDB.name: product.name,
                            ProductDB.price: product.price,
                            ProductDB.stock: product.stock})
         db.commit()
+
+        # Update image name in db
+        if image:
+            save_upload_file(image, product.id)
+
         return {"result": "ok"}
     except Exception as e:
         return {"product": "nok", "error": str(e)}
