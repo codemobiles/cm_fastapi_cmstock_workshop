@@ -46,3 +46,8 @@ curl -X 'GET' \
 curl -X 'GET' \
   'http://localhost:8081/api/v2/product/2' \
   -H 'accept: application/json'
+
+### delete product by id
+curl -X 'DELETE' \
+  'http://localhost:8081/api/v2/product/4' \
+  -H 'accept: application/json'

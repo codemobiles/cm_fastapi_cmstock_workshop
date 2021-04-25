@@ -39,6 +39,26 @@ def save_upload_file(upload_file: UploadFile, id: str) -> str:
         upload_file.file.close()
 
 
+def delete_upload_file(fileName: str) -> None:
+    filePath = os.getcwd() + "/uploaded/images/{}".format(fileName)
+    if os.path.exists(filePath):
+        os.remove(filePath)
+
+
+@router.delete("/{id}")
+async def delete_product(id: str, db: Session = Depends(get_db)):
+    try:
+        products = db.query(ProductDB).filter(ProductDB.id == id)
+        imageFile = products.first().image
+
+        delete_upload_file(imageFile)
+        products.delete()
+        db.commit()
+        return {"result": "ok"}
+    except Exception as e:
+        return {"product": "nok", "error": str(e)}
+
+
 @router.get("/{id}")
 async def get_product_by_id(id: str, db: Session = Depends(get_db)):
     product = db.query(ProductDB).filter(ProductDB.id == id).first()
