@@ -37,3 +37,7 @@ curl -X 'POST' \
 -F 'price=232' \
 -F 'stock=34'
 
+### query all products
+curl -X 'GET' \
+  'http://localhost:8081/api/v2/product/' \
+  -H 'accept: application/json'

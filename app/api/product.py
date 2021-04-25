@@ -2,7 +2,7 @@ from fastapi import APIRouter, Form, Depends, UploadFile, File
 from pydantic import BaseModel
 from typing import Optional
 from app.api import schema
-
+from sqlalchemy import desc
 from app.db import get_db
 from sqlalchemy.orm import Session
 from app.models.Product import Product as ProductDB
@@ -15,8 +15,9 @@ router = APIRouter()
 
 
 @router.get("/")
-def get_product():
-    return [1, 2, 3]
+def get_product(db: Session = Depends(get_db)):
+    product_db = db.query(ProductDB).order_by(desc("created_at"))
+    return product_db.all()
 
 
 def get_product_form(id: Optional[str] = Form(None),
