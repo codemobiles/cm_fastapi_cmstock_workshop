@@ -21,8 +21,19 @@ curl -X 'POST' \
 
 
 ### add product
+# curl -X 'POST' \
+#   'http://localhost:8081/api/v2/product/' \
+#   -H 'accept: application/json' \
+#   -H 'Content-Type: application/x-www-form-urlencoded' \
+#   -d 'id=&name=test2&price=211&stock=233'
+
+### add product using curl (support only in terminal)
 curl -X 'POST' \
-  'http://localhost:8081/api/v2/product/' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'id=&name=test2&price=211&stock=233'
+'http://localhost:8081/api/v2/product/' \
+-H 'accept: application/json' \
+-H 'Content-Type: multipart/form-data' \
+-F 'image=@test.jpg;type=image/jpeg' \
+-F 'name=test2' \
+-F 'price=232' \
+-F 'stock=34'
+
