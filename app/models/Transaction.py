@@ -15,3 +15,6 @@ class Transaction(Base):
     order_list = Column(String(2000))
     staff_id = Column(String(200))
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
