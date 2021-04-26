@@ -15,8 +15,9 @@ router = APIRouter()
 
 
 @router.get("/")
-def get_transaction():
-    return {"result": "transaction"}
+def get_transaction(db: Session = Depends(get_db)):
+    transactions = db.query(TransactionDB).order_by(desc("created_at"))
+    return transactions.all()
 
 
 @router.post("/")
