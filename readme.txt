@@ -8,3 +8,5 @@ source : https://github.com/codemobiles/cm_fastapi_cmstock_workshop
 - install : pip3 install "passlib[bcrypt]"  
 - install : pip3 install python-multipart
 - npx serve webserver -p 80
+- master account
+  username: admin, password: 1234
