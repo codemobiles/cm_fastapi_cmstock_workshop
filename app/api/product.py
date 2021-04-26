@@ -61,7 +61,7 @@ async def update_product(product: schema.Product = Depends(get_product_form),
         if image:
             save_upload_file(image, product.id)
 
-        return {"result": "ok"}
+        return product_db.first().as_dict()
     except Exception as e:
         return {"product": "nok", "error": str(e)}
 
