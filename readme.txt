@@ -7,3 +7,4 @@ source : https://github.com/codemobiles/cm_fastapi_cmstock_workshop
 - pipenv install aiofiles
 - install : pip3 install "passlib[bcrypt]"  
 - install : pip3 install python-multipart
+- npx serve webserver -p 80
