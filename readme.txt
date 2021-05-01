@@ -13,3 +13,4 @@ source : https://github.com/codemobiles/cm_fastapi_cmstock_workshop
 - https://www.youtube.com/watch?v=ttd4zOgCJdc
 - px serve webserver -p 8085 -s
 - https://www.youtube.com/watch?v=bHvl9BhufXs
+- pip3 install "python-jose[cryptography]"
