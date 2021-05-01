@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Any, Dict, List, Optional, Union
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
-
+from app.config.setting import settings
 
 app = FastAPI()
 app.mount("/images", StaticFiles(directory="uploaded/images",
@@ -12,10 +12,13 @@ app.mount("/images", StaticFiles(directory="uploaded/images",
 
 
 # Set all CORS enabled origins
-if True:
+if settings.BACKEND_CORS_ORIGINS:
+    print("Cors settings : ", settings.BACKEND_CORS_ORIGINS)
+
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost", "http://localhost:8085"],
+        allow_origins=[str(origin)
+                       for origin in settings.BACKEND_CORS_ORIGINS],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

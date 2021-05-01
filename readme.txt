@@ -12,3 +12,4 @@ source : https://github.com/codemobiles/cm_fastapi_cmstock_workshop
   username: admin, password: 1234
 - https://www.youtube.com/watch?v=ttd4zOgCJdc
 - px serve webserver -p 8085 -s
+- https://www.youtube.com/watch?v=bHvl9BhufXs
