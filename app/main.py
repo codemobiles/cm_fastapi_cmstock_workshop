@@ -6,7 +6,6 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
 
 
-
 app = FastAPI()
 app.mount("/images", StaticFiles(directory="uploaded/images",
           html=True), name="images")
@@ -16,7 +15,7 @@ app.mount("/images", StaticFiles(directory="uploaded/images",
 if True:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:80"],
+        allow_origins=["http://localhost", "http://localhost:8085"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
