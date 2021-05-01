@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.models.User import User as UserDB
 from app.api import security
 from datetime import datetime, timedelta
+from app.config.setting import settings
 router = APIRouter()
 
 
@@ -44,7 +45,7 @@ def login(user: schema.User, db: Session = Depends(get_db)):
 
         # create jwt token
         access_token_expires = timedelta(
-            minutes=security.ACCESS_TOKEN_EXPIRE_MINUTES)
+            minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         token = security.create_access_token(
             data={"sub": user.username}, expires_delta=access_token_expires)
 

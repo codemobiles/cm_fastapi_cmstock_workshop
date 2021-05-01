@@ -3,6 +3,8 @@ from typing import Optional
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
+from jose import JWTError, jwt
+from app.config.setting import settings
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -13,10 +15,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # from secrets import token_bytes
 # from base64 import b64encode
 # print(b64encode(token_bytes(32)).decode())
-
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30000
 
 
 class Token(BaseModel):
@@ -44,5 +42,5 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         expire = datetime.utcnow() + timedelta(hours=12)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(
-        to_encode, SECRET_KEY, algorithm=ALGORITHM)
+        to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt

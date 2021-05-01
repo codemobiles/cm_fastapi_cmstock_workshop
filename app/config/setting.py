@@ -5,6 +5,8 @@ from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, v
 
 
 class Settings(BaseSettings):
+
+    # Cors
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
         "http://localhost",
         "http://localhost:8085"]
@@ -19,8 +21,14 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "CMSTOCK"
 
-    class Config:
-        case_sensitive = True
+    # Security
+    SECRET_KEY = "LUHH2xSdq9VF81NI/29whx4cqB2Hug8Aqh6R/uWCnuA="
+    ALGORITHM = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES = 30000
+
+
+class Config:
+    case_sensitive = True
 
 
 settings = Settings()
