@@ -22,9 +22,12 @@ def get_transaction(db: Session = Depends(get_db)):
 
 @router.post("/")
 def insert_transaction(transaction: schema.Transaction,
+                       current_user: str = Depends(security.get_current_user),
                        db: Session = Depends(get_db)):
     try:
+        print(current_user)
         db_transaction = TransactionDB(**transaction.dict())
+        db_transaction.staff_id = current_user
         db.add(db_transaction)
         db.commit()
         return db_transaction.as_dict()

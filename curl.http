@@ -73,6 +73,7 @@ curl -X 'POST' \
   'http://localhost:8081/api/v2/transaction/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyMTY3Mzk1N30.1sp6EjeAxtA6tQstyF5elJmkWvRA8L9ybflwN4AI96g' \
   -d '{
   "total": 0,
   "paid": 0,
