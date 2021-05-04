@@ -7,7 +7,12 @@ from sqlalchemy.orm import sessionmaker
 # engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 
 # MySQL
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root@localhost/cmfaststock?charset=utf8mb4"
+# SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root@localhost/cmfaststock?charset=utf8mb4"
+# engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+
+# PostgresSQL
+SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://postgres:12341234@localhost:5432/cmfaststock"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 
