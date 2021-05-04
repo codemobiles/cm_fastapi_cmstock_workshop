@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     # Cors
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
         "http://localhost",
+        "http://localhost:81",
         "http://localhost:8085"]
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
